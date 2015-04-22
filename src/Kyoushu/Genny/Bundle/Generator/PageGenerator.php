@@ -190,6 +190,16 @@ class PageGenerator
     }
 
     /**
+     * @param \Twig_Environment $twig
+     * @return $this
+     */
+    public function setTwig(\Twig_Environment $twig)
+    {
+        $this->twig = $twig;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getPagesDir()
