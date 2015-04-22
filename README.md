@@ -56,17 +56,21 @@ Genny provides a command line interface for generating pages.
 
 Generate all pages
 
-    app/genny genny:generate-page
+    app/genny generate-page
     
 Generate a specific page
 
-    app/genny genny:generate-page homepage
+    app/genny generate-page homepage
+    
+Preview a page
+
+    app/genny generate-page --preview homepage
     
 ### watch
 
-Watch all templates and pages for changes, generating new files in dist as the changes happen.
+Watch all templates and pages for changes, generating new files in dist as they happen.
 
-    app/genny genny:watch
+    app/genny watch
     
 ## Using Genny in a Symfony Project
 
