@@ -1,20 +1,6 @@
 
 services:
 
-    genny.console.application:
-        class: Kyoushu\Genny\Bundle\Console\Application
-        arguments: [ @service_container ]
-
-    genny.console.command.page_generator:
-        class: Kyoushu\Genny\Bundle\Console\Command\PageGeneratorCommand
-        tags:
-            - { name: genny.console.command }
-
-    genny.console.command.watch:
-            class: Kyoushu\Genny\Bundle\Console\Command\WatchCommand
-            tags:
-                - { name: genny.console.command }
-
     genny.twig.loader:
         class: Twig_Loader_Filesystem
         arguments: [ "%genny.templates_dir%" ]

@@ -56,14 +56,39 @@ Genny provides a command line interface for generating pages.
 
 Generate all pages
 
-    app/genny generate-page
+    app/genny genny:generate-page
     
 Generate a specific page
 
-    app/genny generate-page homepage
+    app/genny genny:generate-page homepage
     
 ### watch
 
 Watch all templates and pages for changes, generating new files in dist as the changes happen.
 
-    app/genny watch
+    app/genny genny:watch
+    
+## Using Genny in a Symfony Project
+
+Genny can also be used in an existing Symfony project
+
+### app/AppKernel.php
+
+    $bundles = array(
+        // ...
+        new Kyoushu\Genny\Bundle\GennyBundle(),
+        // ...
+    );
+    
+### app/config.yml
+
+    genny:
+        dist_dir: "%kernel.root_dir%/../web"
+        templates_dir: "%kernel.root_dir%/../src/Acme/DemoBundle/Resources/views"
+        pages_dir: "%kernel.root_dir%/../src/Acme/DemoBundle/Resources/pages"
+        
+### Commands
+
+Commands can be executed using Symfony's console
+
+    app/console genny:generate-page

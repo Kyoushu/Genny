@@ -3,12 +3,17 @@
 
 namespace Kyoushu\Genny;
 
+use Kyoushu\Genny\Bundle\Console\Application;
+use Kyoushu\Genny\Bundle\GennyBundle;
+
 require_once(__DIR__ . '/../vendor/autoload.php');
 
 $kernel = new Kernel('dev', true);
 $kernel->boot();
 
-/** @var \Kyoushu\Genny\Bundle\Console\Application $app */
-$app = $kernel->getContainer()->get('genny.console.application');
+$application = new Application($kernel->getContainer());
+/** @var GennyBundle $bundle */
+$bundle = $kernel->getBundle('GennyBundle');
+$bundle->registerCommands($application);
 
-$app->run();
+$application->run();

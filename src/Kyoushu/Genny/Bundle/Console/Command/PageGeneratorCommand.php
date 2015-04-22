@@ -21,7 +21,16 @@ class PageGeneratorCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('generate-page');
+        $application = $this->getApplication();
+        if($application instanceof \Symfony\Bundle\FrameworkBundle\Console\Application){
+            $this->setName('genny:generate-page');
+        }
+        else{
+            $this->setName('generate-page');
+        }
+
+        $this->setDescription('Generates HTML files');
+
         $this->addArgument('name', InputArgument::OPTIONAL, 'The name of a specific page', null);
         $this->addOption('preview', null, InputOption::VALUE_NONE, 'Output the HTML for page');
     }

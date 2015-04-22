@@ -14,7 +14,15 @@ class WatchCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('watch');
+        $application = $this->getApplication();
+        if($application instanceof \Symfony\Bundle\FrameworkBundle\Console\Application){
+            $this->setName('genny:watch');
+        }
+        else{
+            $this->setName('watch');
+        }
+
+        $this->setDescription('Generates HTML files when pages or templates are altered');
     }
 
     /**
