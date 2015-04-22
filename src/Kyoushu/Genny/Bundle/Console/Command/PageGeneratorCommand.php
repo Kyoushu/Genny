@@ -3,27 +3,20 @@
 namespace Kyoushu\Genny\Bundle\Console\Command;
 
 use Kyoushu\Genny\Bundle\Generator\PageGenerator;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PageGeneratorCommand extends Command
+class PageGeneratorCommand extends ContainerAwareCommand
 {
 
     /**
-     * @var PageGenerator
+     * @return PageGenerator
      */
-    protected $pageGenerator;
-
-    /**
-     * @param PageGenerator $pageGenerator
-     */
-    public function __construct(PageGenerator $pageGenerator)
+    protected function getPageGenerator()
     {
-        $this->pageGenerator = $pageGenerator;
-        parent::__construct();
+        return $this->getContainer()->get('genny.page_generator');
     }
 
     protected function configure()
@@ -39,10 +32,10 @@ class PageGeneratorCommand extends Command
         $preview = $input->getOption('preview');
 
         if($name){
-            $pages = array($this->pageGenerator->findPage($name));
+            $pages = array($this->getPageGenerator()->findPage($name));
         }
         else{
-            $pages = $this->pageGenerator->getPages();
+            $pages = $this->getPageGenerator()->getPages();
         }
 
         foreach($pages as $page){

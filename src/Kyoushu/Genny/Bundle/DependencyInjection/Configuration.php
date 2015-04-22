@@ -14,6 +14,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('genny');
 
         $rootNode->children()->scalarNode('dist_dir')->isRequired();
+        $rootNode->children()->scalarNode('templates_dir')->isRequired();
+        $rootNode->children()->scalarNode('pages_dir')->isRequired();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

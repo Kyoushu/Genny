@@ -7,13 +7,17 @@ services:
 
     genny.console.command.page_generator:
         class: Kyoushu\Genny\Bundle\Console\Command\PageGeneratorCommand
-        arguments: [ @genny.page_generator ]
         tags:
             - { name: genny.console.command }
 
+    genny.console.command.watch:
+            class: Kyoushu\Genny\Bundle\Console\Command\WatchCommand
+            tags:
+                - { name: genny.console.command }
+
     genny.twig.loader:
         class: Twig_Loader_Filesystem
-        arguments: [ "%kernel.root_dir%/../templates" ]
+        arguments: [ "%genny.templates_dir%" ]
 
     genny.twig:
         class: Twig_Environment
@@ -21,4 +25,4 @@ services:
 
     genny.page_generator:
         class: Kyoushu\Genny\Bundle\Generator\PageGenerator
-        arguments: [ @genny.twig, "%kernel.root_dir%/../pages", "%kernel.root_dir%/../dist" ]
+        arguments: [ @genny.twig, "%genny.pages_dir%", "%genny.dist_dir%", "%genny.templates_dir%" ]

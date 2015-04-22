@@ -18,8 +18,9 @@ class GennyExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $pageGeneratorDef = $container->getDefinition('genny.page_generator');
-        $pageGeneratorDef->addMethodCall( 'setDistDir', array( $config['dist_dir'] ) );
+        $container->setParameter('genny.dist_dir', $config['dist_dir']);
+        $container->setParameter('genny.templates_dir', $config['templates_dir']);
+        $container->setParameter('genny.pages_dir', $config['pages_dir']);
     }
 
 }

@@ -1,2 +1,4 @@
 genny:
     dist_dir: "%kernel.root_dir%/../dist"
+    templates_dir: "%kernel.root_dir%/../templates"
+    pages_dir: "%kernel.root_dir%/../pages"

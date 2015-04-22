@@ -32,7 +32,7 @@ class Page
     public function __construct(PageGenerator $pageGenerator, $ymlPath)
     {
         $this->pageGenerator = $pageGenerator;
-        $this->ymlPath = $ymlPath;
+        $this->ymlPath = realpath($ymlPath);
         $this->loadData();
     }
 
@@ -72,6 +72,30 @@ class Page
                 lcfirst($e->getMessage())
             ));
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getYmlPath()
+    {
+        return $this->ymlPath;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return PageGenerator
+     */
+    public function getPageGenerator()
+    {
+        return $this->pageGenerator;
     }
 
     /**

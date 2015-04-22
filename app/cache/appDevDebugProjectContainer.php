@@ -41,6 +41,7 @@ class appDevDebugProjectContainer extends Container
         $this->methodMap = array(
             'genny.console.application' => 'getGenny_Console_ApplicationService',
             'genny.console.command.page_generator' => 'getGenny_Console_Command_PageGeneratorService',
+            'genny.console.command.watch' => 'getGenny_Console_Command_WatchService',
             'genny.page_generator' => 'getGenny_PageGeneratorService',
             'genny.twig' => 'getGenny_TwigService',
             'genny.twig.loader' => 'getGenny_Twig_LoaderService',
@@ -70,6 +71,7 @@ class appDevDebugProjectContainer extends Container
         $this->services['genny.console.application'] = $instance = new \Kyoushu\Genny\Bundle\Console\Application($this);
 
         $instance->add($this->get('genny.console.command.page_generator'));
+        $instance->add($this->get('genny.console.command.watch'));
 
         return $instance;
     }
@@ -84,7 +86,28 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getGenny_Console_Command_PageGeneratorService()
     {
-        return $this->services['genny.console.command.page_generator'] = new \Kyoushu\Genny\Bundle\Console\Command\PageGeneratorCommand($this->get('genny.page_generator'));
+        $this->services['genny.console.command.page_generator'] = $instance = new \Kyoushu\Genny\Bundle\Console\Command\PageGeneratorCommand();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'genny.console.command.watch' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Kyoushu\Genny\Bundle\Console\Command\WatchCommand A Kyoushu\Genny\Bundle\Console\Command\WatchCommand instance.
+     */
+    protected function getGenny_Console_Command_WatchService()
+    {
+        $this->services['genny.console.command.watch'] = $instance = new \Kyoushu\Genny\Bundle\Console\Command\WatchCommand();
+
+        $instance->setContainer($this);
+
+        return $instance;
     }
 
     /**
@@ -97,11 +120,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getGenny_PageGeneratorService()
     {
-        $this->services['genny.page_generator'] = $instance = new \Kyoushu\Genny\Bundle\Generator\PageGenerator($this->get('genny.twig'), ($this->targetDirs[1].'/../pages'), ($this->targetDirs[1].'/../dist'));
-
-        $instance->setDistDir(($this->targetDirs[1].'/../dist'));
-
-        return $instance;
+        return $this->services['genny.page_generator'] = new \Kyoushu\Genny\Bundle\Generator\PageGenerator($this->get('genny.twig'), ($this->targetDirs[1].'/../pages'), ($this->targetDirs[1].'/../dist'), ($this->targetDirs[1].'/../templates'));
     }
 
     /**
@@ -193,6 +212,9 @@ class appDevDebugProjectContainer extends Container
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appDevDebugProjectContainer',
+            'genny.dist_dir' => ($this->targetDirs[1].'/../dist'),
+            'genny.templates_dir' => ($this->targetDirs[1].'/../templates'),
+            'genny.pages_dir' => ($this->targetDirs[1].'/../pages'),
         );
     }
 }

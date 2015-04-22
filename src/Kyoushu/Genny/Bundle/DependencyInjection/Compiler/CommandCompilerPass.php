@@ -13,8 +13,16 @@ class CommandCompilerPass implements CompilerPassInterface
     {
         $applicationDefinition = $container->getDefinition('genny.console.application');
 
-        foreach($container->findTaggedServiceIds('genny.console.command') as $id => $commandDefinition){
+        foreach($container->findTaggedServiceIds('genny.console.command') as $id => $tags){
+
+            $commandDefinition = $container->getDefinition($id);
+
+            if(is_subclass_of($commandDefinition->getClass(), '\Symfony\Component\DependencyInjection\ContainerAwareInterface')){
+                $commandDefinition->addMethodCall('setContainer', array(new Reference('service_container')));
+            }
+
             $applicationDefinition->addMethodCall('add', array(new Reference($id)));
+
         }
     }
 
