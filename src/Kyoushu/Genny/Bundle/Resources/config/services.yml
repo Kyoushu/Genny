@@ -1,0 +1,24 @@
+
+services:
+
+    genny.console.application:
+        class: Kyoushu\Genny\Bundle\Console\Application
+        arguments: [ @service_container ]
+
+    genny.console.command.page_generator:
+        class: Kyoushu\Genny\Bundle\Console\Command\PageGeneratorCommand
+        arguments: [ @genny.page_generator ]
+        tags:
+            - { name: genny.console.command }
+
+    genny.twig.loader:
+        class: Twig_Loader_Filesystem
+        arguments: [ "%kernel.root_dir%/../templates" ]
+
+    genny.twig:
+        class: Twig_Environment
+        arguments: [ @genny.twig.loader ]
+
+    genny.page_generator:
+        class: Kyoushu\Genny\Bundle\Generator\PageGenerator
+        arguments: [ @genny.twig, "%kernel.root_dir%/../pages", "%kernel.root_dir%/../dist" ]

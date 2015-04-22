@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+namespace Kyoushu\Genny;
+
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+$kernel = new Kernel('dev', true);
+$kernel->boot();
+
+/** @var \Kyoushu\Genny\Bundle\Console\Application $app */
+$app = $kernel->getContainer()->get('genny.console.application');
+
+$app->run();

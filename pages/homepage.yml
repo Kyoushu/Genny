@@ -1,0 +1,6 @@
+page:
+    _template: homepage.html.twig
+    _title: Example Site
+    _description: Welcome to the Example Site
+    _url: /index.html
+    foo: bar
