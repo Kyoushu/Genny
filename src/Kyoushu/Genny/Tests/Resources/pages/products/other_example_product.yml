@@ -1,0 +1,9 @@
+page:
+    _url: /products/other-example-product.html
+    _template: product.html.twig
+    _title: My Other Example Product
+
+    name: My Other Example Product
+    price: 22
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget bibendum est.
+    image: http://placehold.it/350x150

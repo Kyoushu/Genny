@@ -1,3 +1,6 @@
 /vendor
 /dist
 /.idea
+/src/Kyoushu/Genny/Tests/cache
+/src/Kyoushu/Genny/Tests/logs
+/src/Kyoushu/Genny/Tests/dist

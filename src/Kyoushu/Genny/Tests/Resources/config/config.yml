@@ -1,0 +1,4 @@
+genny:
+    dist_dir: "%kernel.root_dir%/dist/%kernel.uuid%"
+    templates_dir: "%kernel.root_dir%/Resources/templates"
+    pages_dir: "%kernel.root_dir%/Resources/pages"

@@ -3,6 +3,7 @@
 namespace Kyoushu\Genny\Bundle\Generator;
 
 use Kyoushu\Genny\Bundle\Exception\GennyException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 class PageGenerator
@@ -46,9 +47,17 @@ class PageGenerator
     public function __construct(\Twig_Environment $twig, $pagesDir, $distDir, $templatesDir)
     {
         $this->twig = $twig;
-        $this->pagesDir = $pagesDir;
-        $this->distDir = $distDir;
-        $this->templatesDir = $templatesDir;
+
+        $fs = new Filesystem();
+
+        if(!$fs->exists($pagesDir)) $fs->mkdir($pagesDir);
+        if(!$fs->exists($distDir)) $fs->mkdir($distDir);
+        if(!$fs->exists($templatesDir)) $fs->mkdir($templatesDir);
+
+        $this->pagesDir = realpath($pagesDir);
+        $this->distDir = realpath($distDir);
+        $this->templatesDir = realpath($templatesDir);
+
         $this->load();
     }
 

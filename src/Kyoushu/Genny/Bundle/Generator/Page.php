@@ -43,7 +43,13 @@ class Page
      */
     public function getName()
     {
-        return preg_replace('/\.yml$/', '', basename($this->ymlPath));
+        $pageDirRegex = sprintf('/^%s\//', preg_quote($this->pageGenerator->getPagesDir(), '/'));
+
+        $name = $this->ymlPath;
+        $name = preg_replace($pageDirRegex, '', $name);
+        $name = preg_replace('/\.yml$/', '', $name);
+
+        return $name;
     }
 
     protected function loadData()
