@@ -15,7 +15,7 @@ abstract class GennyCommand extends Command implements ContainerAwareInterface
     public function __construct($namePrefix)
     {
         $this->setNamePrefix($namePrefix);
-        parent::__construct($name);
+        parent::__construct();
     }
 
     /**
