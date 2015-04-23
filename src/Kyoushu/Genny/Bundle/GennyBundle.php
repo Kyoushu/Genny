@@ -21,10 +21,12 @@ class GennyBundle extends Bundle
     public function registerCommands(Application $application)
     {
 
-        $pageGeneratorCommand = new PageGeneratorCommand();
+        $namePrefix = $this->container->getParameter('genny.console_command_prefix');
+
+        $pageGeneratorCommand = new PageGeneratorCommand($namePrefix);
         $pageGeneratorCommand->setContainer($this->container);
 
-        $watchCommand = new WatchCommand();
+        $watchCommand = new WatchCommand($namePrefix);
         $watchCommand->setContainer($this->container);
 
         $application->add($pageGeneratorCommand);

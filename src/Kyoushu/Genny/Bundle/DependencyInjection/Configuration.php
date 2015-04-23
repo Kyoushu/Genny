@@ -16,6 +16,7 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()->scalarNode('dist_dir')->isRequired();
         $rootNode->children()->scalarNode('templates_dir')->isRequired();
         $rootNode->children()->scalarNode('pages_dir')->isRequired();
+        $rootNode->children()->scalarNode('console_command_prefix')->defaultValue('genny');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

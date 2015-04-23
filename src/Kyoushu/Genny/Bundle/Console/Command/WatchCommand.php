@@ -9,19 +9,12 @@ use Kyoushu\Genny\Bundle\Generator\PageGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class WatchCommand extends ContainerAwareCommand
+class WatchCommand extends GennyCommand
 {
 
     protected function configure()
     {
-        $application = $this->getApplication();
-        if($application instanceof \Symfony\Bundle\FrameworkBundle\Console\Application){
-            $this->setName('genny:watch');
-        }
-        else{
-            $this->setName('watch');
-        }
-
+        $this->setName( ($this->namePrefix ? $this->namePrefix . ':' : '') . 'watch' );
         $this->setDescription('Generates HTML files when pages or templates are altered');
     }
 

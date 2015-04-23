@@ -21,6 +21,7 @@ class GennyExtension extends Extension
         $container->setParameter('genny.dist_dir', $config['dist_dir']);
         $container->setParameter('genny.templates_dir', $config['templates_dir']);
         $container->setParameter('genny.pages_dir', $config['pages_dir']);
+        $container->setParameter('genny.console_command_prefix', $config['console_command_prefix']);
     }
 
 }

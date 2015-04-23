@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PageGeneratorCommand extends ContainerAwareCommand
+class PageGeneratorCommand extends GennyCommand
 {
 
     /**
@@ -21,14 +21,7 @@ class PageGeneratorCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $application = $this->getApplication();
-        if($application instanceof \Symfony\Bundle\FrameworkBundle\Console\Application){
-            $this->setName('genny:generate-page');
-        }
-        else{
-            $this->setName('generate-page');
-        }
-
+        $this->setName( ($this->namePrefix ? $this->namePrefix . ':' : '') . 'generate-page' );
         $this->setDescription('Generates HTML files');
 
         $this->addArgument('name', InputArgument::OPTIONAL, 'The name of a specific page', null);
